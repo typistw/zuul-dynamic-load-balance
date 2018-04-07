@@ -1,0 +1,46 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: zuul-load-balance
+
+logging:
+  level:
+    root: info
+
+#  zuul 配置
+zuul:
+  routes:
+    instanceName:  # route key， 随意，不重复即可
+      path: /static/loadbalance/** # 路由表达式
+      serviceId: firstClientId  # 客户端id
+      stripPrefix: false   # 路由时保留 表达式前缀
+    dynamicClientRuote:
+      path: /dynamic/loadbalance/**
+      serviceId: dynamicClientId
+      stripPrefix: false
+
+# ribbon
+ribbon:
+  eureka:
+    enabled: false
+
+
+# ribbon 客户端，名字与zuul里serverId保持一致
+firstClientId:
+  ribbon:
+    # 服务端列表
+    listOfServers: http://localhost:8081,http://localhost:8081
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+
+
+
+
