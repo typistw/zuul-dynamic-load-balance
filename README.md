@@ -1,4 +1,4 @@
-# zuul-dyamic-load-balance
+# zuul-dynamic-load-balance
 客户端负载均衡：客户端会有一个服务器地址列表，在发送请求前通过负载均衡算法选择一个服务器，然后进行访问。
 ##  说明
 ribbon客户端需配合zuul使用。
